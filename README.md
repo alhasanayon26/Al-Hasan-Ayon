@@ -2,7 +2,7 @@
 
 Personal portfolio of **Rifaat Al Hasan Ayon**, a Software Engineering undergraduate at Daffodil International University who builds software and customizes Android systems (HyperOS, MIUI, Magisk and KernelSU modules).
 
-**Live site: ** `https://alhasanayon26.github.io/<repo-name>/`
+**Live site: ** `(https://alhasanayon26.github.io/Al-Hasan-Ayon)`
 
 ---
 
