@@ -81,10 +81,10 @@ let px=-1,py=-1,hold=0,hide=0,idDone=false; /* in-memory only: shows once per pa
 let uiOver=false;
 const inPortrait=()=>{if(uiOver)return null;const p=$('.portrait');if(!p)return null;const r=p.getBoundingClientRect();return(px>=r.left&&px<=r.right&&py>=r.top&&py<=r.bottom)?r:null};
 const showId=r=>{idDone=true;const w=Math.min(310,innerWidth-24);card.style.left=Math.max(12,Math.min(innerWidth-w-12,r.left+r.width/2-w/2))+'px';card.style.top=Math.max(80,Math.min(innerHeight-250,r.top+r.height*.5))+'px';card.classList.add('show');mark('spidey');clearTimeout(hide);hide=setTimeout(()=>card.classList.remove('show'),7000)};
-addEventListener('pointermove',e=>{px=e.clientX;py=e.clientY;uiOver=!!(e.target&&e.target.closest&&e.target.closest('#cmdWin,#secP'));const r=inPortrait();
+addEventListener('pointermove',e=>{px=e.clientX;py=e.clientY;uiOver=!!(e.target&&e.target.closest&&e.target.closest('#cmdWin,#secP,.btn,a,button'));const r=inPortrait();
  if(r){if(!hold&&!idDone)hold=setTimeout(()=>{hold=0;const q=inPortrait();if(q)showId(q)},calm()?1500:2500)}
  else{clearTimeout(hold);hold=0;card.classList.remove('show')}},{passive:true});
-addEventListener('pointerdown',e=>{px=e.clientX;py=e.clientY;uiOver=!!(e.target&&e.target.closest&&e.target.closest('#cmdWin,#secP'))},{passive:true});
+addEventListener('pointerdown',e=>{px=e.clientX;py=e.clientY;uiOver=!!(e.target&&e.target.closest&&e.target.closest('#cmdWin,#secP,.btn,a,button'))},{passive:true});
 ['pointercancel','blur'].forEach(k=>addEventListener(k,()=>{clearTimeout(hold);hold=0;card.classList.remove('show')}));
 addEventListener('scroll',()=>{if(!inPortrait()){clearTimeout(hold);hold=0;card.classList.remove('show')}},{passive:true});
 /* 5 · Command prompt: ` (backtick) on PC, or tap the logo 5 times anywhere */
