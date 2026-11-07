@@ -1,5 +1,13 @@
 # Portfolio – Rifaat Al Hasan Ayon
 
+## Open in VS Code
+1. File > Open Folder... and pick this folder.
+2. Install the recommended **Live Server** extension (VS Code will offer it).
+3. Right-click `index.html` > **Open with Live Server**.
+
+Open it through Live Server (http://127.0.0.1:5500), not by double-clicking the file:
+a few effects read image pixels on a canvas, and browsers block that on file:// pages.
+
 ## Structure
 - `index.html` – page markup
 - `css/main.css` – main styles

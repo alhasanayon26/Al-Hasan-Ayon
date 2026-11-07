@@ -6,7 +6,7 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;'
 const dk=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 const ago=t=>{const s=Math.max(0,(Date.now()-new Date(t).getTime())/1000);if(s<90)return 'just now';const m=s/60;if(m<60)return Math.round(m)+'m ago';const h=m/60;if(h<24)return Math.round(h)+'h ago';const d=h/24;if(d<30)return Math.round(d)+'d ago';const mo=d/30;if(mo<12)return Math.round(mo)+'mo ago';return Math.round(d/365)+'y ago'};
 const nums=[...root.querySelectorAll('[data-c]')],pill=$('#ghLive');
-let rl=false,wait=0,cur=null,syncT=0,live=null,went=false,vis=false,lastSig='',lastIso='',busy=false,fails=0,tm=0;
+const dbg=/ghdebug/.test(location.search);let lastErr='',rl=false,wait=0,cur=null,syncT=0,live=null,went=false,vis=false,lastSig='',lastIso='',busy=false,fails=0,tm=0;
 /* placeholder grid keeps the panel height stable while loading */
 $('#ghGrid').innerHTML='<i></i>'.repeat(WK*7);
 async function j(u,tries=2){for(let i=0;i<tries;i++){const c=new AbortController(),to=setTimeout(()=>c.abort(),15000);try{const r=await fetch(u,{headers:{Accept:'application/vnd.github+json'},signal:c.signal,cache:'no-cache'});
@@ -18,7 +18,7 @@ async function fetchAll(){const E=A+'/events/public?per_page=100&page=';
  let ev=[].concat(e1||[]);if(e1&&e1.length>=100){const e2=await j(E+2,1).catch(()=>[]);ev=ev.concat(e2);if(e2.length>=100)ev=ev.concat(await j(E+3,1).catch(()=>[]))}
  const days=e1?{}:Object.assign({},cur&&cur.days);ev.forEach(e=>{if(!e||!e.created_at)return;const k=dk(new Date(e.created_at)),p=e.payload||{};days[k]=(days[k]||0)+(e.type==='PushEvent'?Math.max(1,p.size||(p.commits&&p.commits.length)||1):1)});
  return{u:{name:u.name||u.login,av:u.avatar_url,followers:u.followers,repos:u.public_repos},repos:r.map(x=>({n:x.name,d:x.description,l:x.language,s:x.stargazers_count,p:x.pushed_at,f:x.fork,h:x.html_url})),days}}
-function setPill(){if(!cur){pill.classList.toggle('off',live===false);pill.lastChild.textContent=live===false?(rl?'GitHub busy · retrying':'Offline · retrying'):'Syncing…';return}
+function setPill(){if(!cur){pill.classList.toggle('off',live===false);pill.lastChild.textContent=(live===false?(rl?'GitHub busy · retrying':'Offline · retrying'):'Syncing…')+(dbg&&lastErr?' ['+lastErr+']':'');return}
  if(live===null){pill.classList.remove('off');pill.lastChild.textContent='Syncing…';return}
  pill.classList.toggle('off',!live);pill.lastChild.textContent=live?'Live · synced '+ago(syncT):(rl?'GitHub busy · cached ':'Offline · cached ')+ago(syncT)}
 const setLast=()=>{$('#ghLast').textContent=lastIso?ago(lastIso):'—'};
@@ -48,13 +48,16 @@ function apply(d,t){cur=d;syncT=t;setPill();
  root.classList.add('ready');go()}
 function go(){if(went||!vis||!cur)return;went=true;root.classList.add('go');nums.forEach(n=>{n._v=0;setNum(n,n.dataset.t,true)});setTimeout(()=>root.classList.add('settled'),3000)}
 function schedule(){clearTimeout(tm);const d=wait||(fails?Math.min(9e5,2e4*Math.pow(3,fails-1)):BASE);wait=0;tm=setTimeout(()=>{document.hidden?schedule():sync()},d)}
+async function snap(){if(cur)return;try{const r=await fetch('data/github.json',{cache:'no-cache'});if(!r.ok)return;const s=await r.json();if(!s||s.empty||!s.u||!s.repos||cur)return;
+ if(!s.days){const days={};(s.ev||[]).forEach(x=>{const k=dk(new Date(x[0]));days[k]=(days[k]||0)+x[1]});s.days=days}
+ live=false;apply(s,s.t||Date.now())}catch(e){}}
 async function sync(){if(busy)return;busy=true;
  try{const d=await fetchAll(),t=Date.now();try{localStorage.setItem(KEY,JSON.stringify({t,d}))}catch(e){}fails=0;rl=false;live=true;apply(d,t)}
- catch(e){fails++;live=false;rl=!!e.rl;if(e.rl)wait=Math.min(36e5,Math.max(12e4,(e.reset||0)-Date.now()+5e3));setPill()}
+ catch(e){fails++;live=false;lastErr=(e&&(e.message||e.name))||'error';rl=!!e.rl;snap();if(e.rl)wait=Math.min(36e5,Math.max(12e4,(e.reset||0)-Date.now()+5e3));setPill()}
  finally{busy=false;schedule()}}
 new IntersectionObserver(es=>{vis=es[0].isIntersecting;root.classList.toggle('off',!vis);go()},{threshold:.15}).observe(root);
 let c=null;try{c=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
-if(c&&c.d&&c.d.u&&c.d.repos&&c.d.days)apply(c.d,c.t);else setPill();
+if(c&&c.d&&c.d.u&&c.d.repos&&c.d.days)apply(c.d,c.t);else{setPill();snap()}
 sync();
 setInterval(()=>{if(!document.hidden){setPill();setLast()}},3e4);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-syncT>9e4)sync()});
