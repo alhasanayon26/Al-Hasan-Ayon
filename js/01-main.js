@@ -47,7 +47,7 @@ P.push({el:$('.portrait img'),k:-34},{el:$('#h1'),k:26});
  const hov=v=>{if(v&&!was){was=true;tgt=true;lv=1;try{snd.currentTime=0;snd.volume=0;const pr=snd.play();pr&&pr.catch&&pr.catch(()=>{})}catch(e){}sr||(sr=raf(sstep))}else if(!v&&was){was=false;tgt=false}};
  const mv=e=>{
   if(calm()||H.classList.contains('is-splash')||H.classList.contains('px-run')){tr=0;say.classList.remove('on');hov(false);go();return}
-  const b=pimg.getBoundingClientRect(),tg=e.target,onUi=!!(tg&&tg.closest&&tg.closest('#cmdWin,#secP,.sec-panel,#idCard')),inside=!onUi&&e.clientX>=b.left&&e.clientX<=b.right&&e.clientY>=b.top&&e.clientY<=b.bottom;
+  const b=pimg.getBoundingClientRect(),tg=e.target,onUi=!!(tg&&tg.closest&&tg.closest('#cmdWin,#secP,.sec-panel,#idCard,.btn,a,button')),inside=!onUi&&e.clientX>=b.left&&e.clientX<=b.right&&e.clientY>=b.top&&e.clientY<=b.bottom;
   tx=e.clientX-b.left;ty=e.clientY-b.top;
   if(inside&&r<1){x=tx;y=ty}
   tr=inside?R:0;go();hov(inside);
