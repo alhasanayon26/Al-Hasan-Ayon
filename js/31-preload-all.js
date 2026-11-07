@@ -14,7 +14,7 @@ function preload(){
     ].forEach(f=>document.fonts.load(f).catch(()=>{}));
   }
   /* 3. counters: show final numbers, so they don't count up on scroll */
-  document.querySelectorAll('[data-n]').forEach(n=>{if(n.done)return;n.done=1;n.textContent=n.dataset.n+(n.dataset.s||'')});
+  document.querySelectorAll('.stat [data-n]').forEach(n=>{if(n.done||n.children.length)return;n.done=1;n.textContent=n.dataset.n+(n.dataset.s||'')});
   /* 4. reveal every section now (same trick the nav links use), without transitions */
   document.querySelectorAll('.rv:not(.in)').forEach(n=>n.classList.add('in'));
   H.classList.add('nav-go');
