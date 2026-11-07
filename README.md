@@ -190,7 +190,6 @@ A neon-style Snake game that runs right in the browser. Eat the glowing orbs, gr
 ![Magisk](https://img.shields.io/badge/Magisk_/_KernelSU_Modules-3DDC84?style=flat-square&logo=android&logoColor=white)
 ![Shell](https://img.shields.io/badge/Shell-4EAA25?style=flat-square&logo=gnubash&logoColor=white)
 ![Fastboot](https://img.shields.io/badge/Fastboot-3DDC84?style=flat-square&logo=android&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black)
 
 **Tools**
 
