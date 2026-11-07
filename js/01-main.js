@@ -32,7 +32,7 @@ P.push({el:$('.portrait img'),k:-34},{el:$('#h1'),k:26});
  const say=D.createElement('div');say.className='sp-say';say.textContent='Oh, that\u2019s my favorite character \ud83d\udd77\ufe0f';D.body.appendChild(say);
  const R=Math.round(Math.max(110,Math.min(240,innerHeight*.24,innerWidth*.42)));
  const pf=spx.parentNode;
- const tick=()=>{r+=(tr-r)*.2;x+=(tx-x)*.4;y+=(ty-y)*.4;
+ const tick=()=>{if(calm()){r=tr;x=tx;y=ty}else{r+=(tr-r)*.2;x+=(tx-x)*.4;y+=(ty-y)*.4}
   pf.style.setProperty('--r',r.toFixed(1)+'px');pf.style.setProperty('--sx',x.toFixed(1)+'px');pf.style.setProperty('--sy',y.toFixed(1)+'px');
   const idle=(r<.5&&!tr);
   spx.style.visibility=idle?'hidden':'visible';pf.classList.toggle('suit',!idle);
@@ -46,7 +46,7 @@ P.push({el:$('.portrait img'),k:-34},{el:$('#h1'),k:26});
   if(lv<=0){snd.pause();return}sr=raf(sstep)};
  const hov=v=>{if(v&&!was){was=true;tgt=true;lv=1;try{snd.currentTime=0;snd.volume=0;const pr=snd.play();pr&&pr.catch&&pr.catch(()=>{})}catch(e){}sr||(sr=raf(sstep))}else if(!v&&was){was=false;tgt=false}};
  const mv=e=>{
-  if(calm()||H.classList.contains('is-splash')||H.classList.contains('px-run')){tr=0;say.classList.remove('on');hov(false);go();return}
+  if(H.classList.contains('is-splash')||H.classList.contains('px-run')){tr=0;say.classList.remove('on');hov(false);go();return}
   const b=pimg.getBoundingClientRect(),tg=e.target,onUi=!!(tg&&tg.closest&&tg.closest('#cmdWin,#secP,.sec-panel,#idCard,.btn,a,button')),inside=!onUi&&e.clientX>=b.left&&e.clientX<=b.right&&e.clientY>=b.top&&e.clientY<=b.bottom;
   tx=e.clientX-b.left;ty=e.clientY-b.top;
   if(inside&&r<1){x=tx;y=ty}
