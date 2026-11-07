@@ -1,7 +1,9 @@
 /* live GitHub panel: shows cached data instantly, then keeps itself in sync (revalidating requests are free when nothing changed) */
+/* Optional: paste your Cloudflare Worker URL here (no trailing slash) for unlimited live updates on every network. Leave '' to call GitHub directly. */
+const API='';
 (()=>{const root=document.getElementById('ghx');if(!root)return;
 const U=root.dataset.user,H=document.documentElement,calm=()=>H.hasAttribute('data-calm'),$=s=>root.querySelector(s);
-const KEY='ghx:v1:'+U,COL=['#7cf2c8','#9db8ff','#ffd479','#ff9fc2','#c7f36b','#aab1bb'],WK=14,BASE=3e5,A='https://api.github.com/users/'+U;
+const KEY='ghx:v1:'+U,COL=['#7cf2c8','#9db8ff','#ffd479','#ff9fc2','#c7f36b','#aab1bb'],WK=14,BASE=3e5,A=(API||'https://api.github.com')+'/users/'+U;
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const dk=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 const ago=t=>{const s=Math.max(0,(Date.now()-new Date(t).getTime())/1000);if(s<90)return 'just now';const m=s/60;if(m<60)return Math.round(m)+'m ago';const h=m/60;if(h<24)return Math.round(h)+'h ago';const d=h/24;if(d<30)return Math.round(d)+'d ago';const mo=d/30;if(mo<12)return Math.round(mo)+'mo ago';return Math.round(d/365)+'y ago'};
