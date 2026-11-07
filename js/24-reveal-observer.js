@@ -1,0 +1,1 @@
+(()=>{if(!window.IntersectionObserver)return;const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('poff',!e.isIntersecting)),{rootMargin:'120px 0px'});document.querySelectorAll('section').forEach(x=>io.observe(x))})();
