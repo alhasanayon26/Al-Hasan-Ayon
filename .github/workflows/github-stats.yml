@@ -1,0 +1,37 @@
+name: Update GitHub stats
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch stats
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_USER: alhasanayon26
+        run: |
+          node - <<'JS'
+          const U=process.env.GH_USER,T=process.env.GH_TOKEN;
+          const g=async u=>{const r=await fetch('https://api.github.com'+u,{headers:{Authorization:'Bearer '+T,Accept:'application/vnd.github+json'}});if(!r.ok)throw new Error(u+' '+r.status);return r.json()};
+          (async()=>{
+            const u=await g('/users/'+U),r=await g('/users/'+U+'/repos?per_page=100&sort=pushed');
+            let ev=[];for(let p=1;p<=3;p++){try{const e=await g('/users/'+U+'/events/public?per_page=100&page='+p);ev=ev.concat(e);if(e.length<100)break}catch(x){break}}
+            const out={t:Date.now(),
+              u:{name:u.name||u.login,av:u.avatar_url,followers:u.followers,repos:u.public_repos},
+              repos:r.map(x=>({n:x.name,d:x.description,l:x.language,s:x.stargazers_count,p:x.pushed_at,f:x.fork,h:x.html_url})),
+              ev:ev.filter(e=>e&&e.created_at).map(e=>[e.created_at,e.type==='PushEvent'?Math.max(1,(e.payload&&(e.payload.size||(e.payload.commits&&e.payload.commits.length)))||1):1])};
+            require('fs').mkdirSync('data',{recursive:true});
+            require('fs').writeFileSync('data/github.json',JSON.stringify(out));
+          })().catch(e=>{console.error(e);process.exit(1)});
+          JS
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/github.json
+          git diff --cached --quiet || (git commit -m "chore: refresh GitHub stats" && git push)
