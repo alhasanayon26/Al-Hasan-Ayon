@@ -1,0 +1,87 @@
+/* ==========================================================================
+   mobile.css — phone optimisation layer (loaded LAST, after id-card.css)
+   Follows the "responsive container" recipe:
+     1. never a fixed pixel width  ->  width:100% + max-width
+     2. side breathing room        ->  padding-inline (one --gutter variable)
+     3. centre it                  ->  margin-inline:auto
+     4. padding must not widen it  ->  box-sizing:border-box on everything
+   ========================================================================== */
+
+/* 4. padding/border always count inside the width (already in main.css; kept here as a guarantee) */
+*,*::before,*::after{box-sizing:border-box}
+
+/* One gutter value for the whole site (was 3 different hard-coded values) */
+:root{--gutter:20px}
+@media(min-width:561px) and (max-width:920px){:root{--gutter:28px}}
+@media(max-width:560px){:root{--gutter:clamp(16px,5vw,22px)}}
+
+/* 1+2+3. The main page container.
+   Desktop result is identical to before (1160px of content), but it can now
+   never be wider than the screen, and it respects phone notches in landscape. */
+.wrap{
+  width:100%;
+  max-width:calc(1160px + var(--gutter)*2);
+  margin-inline:auto;
+  padding-left:max(var(--gutter),env(safe-area-inset-left,0px));
+  padding-right:max(var(--gutter),env(safe-area-inset-right,0px));
+}
+/* .intro sets vertical padding only; keep it */
+.wrap.intro{padding-top:34px;padding-bottom:8px}
+
+/* Media can never push the layout wider than the screen */
+img,video,picture{max-width:100%}
+
+/* Remove the 300ms tap delay / double-tap-zoom on controls */
+a,button,[role="button"],summary,label,input,select,textarea{touch-action:manipulation}
+
+/* ---------- Spoken-languages rows ("Hindi / Urdu" was wrapping one word per line) ---------- */
+@media(max-width:640px){
+  .sp{flex-wrap:nowrap;gap:12px;padding:14px}
+  .sc2{width:46px;height:46px;border-radius:14px;font-size:15px}
+  .meter{margin-left:0;flex:none;gap:4px}
+  .meter i{width:10px;height:24px}
+  .sn em{letter-spacing:.08em}
+}
+@media(max-width:380px){
+  .sp{gap:10px;padding:12px}
+  .sc2{width:40px;height:40px;font-size:14px}
+  .meter{gap:3px}
+  .meter i{width:8px;height:22px}
+}
+
+/* ---------- Readable small text on phones (was 10–11px) ---------- */
+@media(max-width:560px){
+  .eye,.stat span,.sx-stats span,.sn em,.th em,.ghx-stats span,.ghx-repos small,.it.c .no{font-size:12px}
+  .bs-n small{font-size:11px}
+}
+
+/* ---------- Touch devices: no "stuck" hover lifts after a tap ---------- */
+@media(hover:none){
+  .lang:hover,.it:hover,.sp:hover,.btn:hover,.ghx-stats>a:hover,.ghx-repos a:hover,.edu-grid .ed .edc:hover{transform:none}
+  .lang:hover .big{transform:none}
+}
+
+/* ---------- Phones in landscape (short screens) ---------- */
+@media(max-height:500px) and (orientation:landscape){
+  .bs-card p{font-size:14px!important}
+}
+
+/* ---------- Very small phones (≤ 340px) ---------- */
+@media(max-width:340px){
+  .bs-card h4{font-size:1.15rem!important}
+  .btn{padding-inline:14px}
+}
+
+/* ---------- Header on small phones: CTA + menu button must never be squeezed ---------- */
+.nav-cta,.burger{flex:none}
+.burger{min-width:44px}
+.brand{min-height:44px}
+@media(max-width:400px){
+  .brand{min-width:0;flex:0 1 auto}
+  .brand span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis}
+}
+
+/* ---------- Bigger tap area for inline text links (school / university names) ---------- */
+@media(pointer:coarse){
+  .edu-grid .ed a{display:inline-block;padding-block:12px;margin-block:-12px}
+}

@@ -61,7 +61,9 @@ html:not(.is-splash) #skel .sb{display:flex;flex-direction:column;align-items:ce
 @media(max-width:920px){#skel .hn .ln{display:none}#skel .hn .cta{width:40px;height:40px}}
 </style>
 <link rel="stylesheet" href="css/overrides.css?v=20261107b">
-<link rel="stylesheet" href="css/story.css?v=20261107b">
+<link rel="stylesheet" href="css/story.css?v=20261117">
+<link rel="stylesheet" href="css/id-card.css?v=20261112">
+<link rel="stylesheet" href="css/mobile.css?v=20261108">
 
 
 </head>
@@ -186,10 +188,34 @@ html:not(.is-splash) #skel .sb{display:flex;flex-direction:column;align-items:ce
 </div></section>
 <section id="journey"><div class="ani gf" aria-hidden="true"><b lang="ar" title="knowledge" style="left:4%;top:58%;--r:-6deg;animation-delay:-0s">علم</b><b lang="ja" title="learn" style="left:70%;top:8%;--r:8deg;animation-delay:-3s">学</b></div><div class="ani rain" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><div class="wrap">
 <div class="sh rv"><div><div class="eye">Academic Journey</div><h2>Education</h2></div></div>
-<div class="edu" id="edu"><div class="edu-line" aria-hidden="true"><i class="edu-fill"></i></div><b class="edu-dot" aria-hidden="true"></b>
+<div class="edu-grid"><div class="edu" id="edu"><div class="edu-line" aria-hidden="true"><i class="edu-fill"></i></div><b class="edu-dot" aria-hidden="true"></b>
 <div class="ed l rv"><span class="node"></span><div class="glass edc" data-y="2026"><div class="eh"><span class="st now"><i></i>Current</span><time>May 2026 — Present</time></div><h3>Bachelor of Science (BSc) in Software Engineering</h3><p class="inst"><a href="https://daffodilvarsity.edu.bd/" target="_blank" rel="noopener">Daffodil International University</a></p><p class="mtx">Building a foundation in how real software is designed, built and shipped.</p><ul><li>Core focus: programming, algorithms, databases, web</li></ul></div></div>
 <div class="ed r rv"><span class="node"></span><div class="glass edc" data-y="2023"><div class="eh"><span class="st">Completed</span><time>Oct 2023 — Jul 2025</time></div><h3>Higher Secondary Certificate (HSC)</h3><p class="inst">Group: Science · <a href="https://bafsk.edu.bd/" target="_blank" rel="noopener">BAF Shaheen College Kurmitola</a></p><p class="mtx">Two years that sharpened my logic, maths and discipline, and where my interest in coding took off.</p><ul><li>Subjects: physics, chemistry, higher maths</li><li>Started building small web projects on the side</li><li>Learned to balance studies with self-learning</li></ul></div></div>
 <div class="ed l rv"><span class="node"></span><div class="glass edc" data-y="2021"><div class="eh"><span class="st">Completed</span><time>Jan 2021 — May 2023</time></div><h3>Secondary School Certificate (SSC)</h3><p class="inst">Group: Science · <a href="https://bafsk.edu.bd/" target="_blank" rel="noopener">BAF Shaheen College Kurmitola</a></p><p class="mtx">Where the journey began: a foundation in maths and science, and the discovery that I enjoy solving problems step by step.</p><ul><li>First steps with computers and technology</li><li>Built the study habits I still use today</li></ul></div></div>
+</div>
+<div class="idc-stage" id="idcStage" aria-label="Interactive student ID card">
+<svg class="idc-lan" id="idcLan" aria-hidden="true"><path class="l0" id="idcL0"/><path class="l1" id="idcL1"/><path class="l2" id="idcL2"/><text><textPath id="idcLT" href="#idcL1" startOffset="16">Rifaat Al Hasan Ayon ✦ Software Engineering ✦ DIU ✦</textPath></text></svg>
+<i class="idc-pin" aria-hidden="true"></i>
+<div class="idc-card" id="idcCard" tabindex="0" role="group" aria-label="Student ID card of Rifaat Al Hasan Ayon. Drag to swing it, click or press Enter to flip it.">
+<svg class="idc-clip" viewBox="0 0 64 60" aria-hidden="true"><defs><linearGradient id="idcMetal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#454a54"/><stop offset=".45" stop-color="#15171c"/><stop offset="1" stop-color="#2c3037"/></linearGradient></defs><rect x="15" y="4" width="34" height="18" rx="6" fill="none" stroke="url(#idcMetal)" stroke-width="5"/><rect x="26" y="24" width="12" height="9" rx="3" fill="url(#idcMetal)" stroke="#050608"/><path d="M23 33h18v13q0 12-9 12t-9-12z" fill="url(#idcMetal)" stroke="#050608"/><rect x="29" y="38" width="6" height="14" rx="3" fill="#050608"/><path d="M25.5 35.5h13" stroke="rgba(255,255,255,.22)" stroke-linecap="round"/></svg>
+<div class="idc-flip" id="idcFlip">
+<i class="idc-pl" style="transform:translateZ(-3px)"></i><i class="idc-pl" style="transform:translateZ(-1.5px)"></i><i class="idc-pl"></i><i class="idc-pl" style="transform:translateZ(1.5px)"></i><i class="idc-pl" style="transform:translateZ(3px)"></i>
+<div class="idc-face idc-front"><i class="idc-slot"></i>
+<div class="idc-top"><span class="idc-logo"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24.00 6.00L29.19 17.00L18.81 17.00ZM16.92 21.00L31.08 21.00L35.81 31.00L24.00 25.80L12.19 31.00ZM10.31 35.00L19.81 35.00L16.03 43.00L6.53 43.00ZM28.19 35.00L37.69 35.00L41.47 43.00L31.97 43.00Z"/></svg></span><span class="idc-ttl">Student ID</span><span class="idc-yr">2026</span></div>
+<div class="idc-photo"><img src="assets/img/card-photo.webp" alt="Portrait of Rifaat Al Hasan Ayon" width="972" height="860" draggable="false" decoding="async"><i class="idc-tick a"></i><i class="idc-tick b"></i><i class="idc-scan"></i><span class="idc-ver"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Verified</span><span class="idc-no">N° 26</span></div>
+<div class="idc-id"><h3>Rifaat Al Hasan Ayon</h3><p class="idc-deg">BSc in Software Engineering</p><p class="idc-uni"><i></i>Daffodil International University</p></div>
+<dl class="idc-meta"><div><dt>Since</dt><dd>May 2026</dd></div><div><dt>Status</dt><dd><i></i>Active</dd></div><div><dt>City</dt><dd>Dhaka, BD</dd></div></dl>
+<div class="idc-bar"><svg id="idcBars" viewBox="0 0 150 22" preserveAspectRatio="none" aria-hidden="true"></svg><span>RAH·SWE·26</span></div>
+<i class="idc-foil"></i><i class="idc-shine"></i></div>
+<div class="idc-face idc-back"><i class="idc-slot"></i><div class="idc-mag"></div><div class="idc-mono" aria-hidden="true">RA</div>
+<div class="idc-bb"><p class="idc-ret">If found, please get in touch</p>
+<ul class="idc-links"><li><a href="https://github.com/alhasanayon26" target="_blank" rel="noopener"><b>GH</b><span>github.com/alhasanayon26</span></a></li><li><a href="https://www.linkedin.com/in/alhasanayon26" target="_blank" rel="noopener"><b>IN</b><span>linkedin.com/in/alhasanayon26</span></a></li><li><a href="mailto:alhasanayon26@gmail.com"><b>@</b><span>alhasanayon26@gmail.com</span></a></li></ul>
+<div class="idc-sig"><small>Authorised signature</small><em>Rifaat Al Hasan Ayon</em></div>
+<p class="idc-fine">Software Engineering · Daffodil International University · Dhaka, Bangladesh</p></div>
+<i class="idc-foil"></i><i class="idc-shine"></i></div>
+</div></div>
+<div class="idc-hint"><span class="t">Drag · throw · click to flip</span></div>
+</div>
 </div>
 </div></section>
 
@@ -259,7 +285,7 @@ html:not(.is-splash) #skel .sb{display:flex;flex-direction:column;align-items:ce
 <script src="js/16-email-button.js?v=20261107b"></script>
 <script src="js/17-skill-descriptions.js?v=20261107b"></script>
 
-<script src="js/18-beyond-stack.js?v=20261107b"></script>
+<script src="js/18-beyond-stack.js?v=20261108"></script>
 
 <script src="js/19-skills-hover.js?v=20261107b"></script>
 
@@ -290,7 +316,8 @@ html:not(.is-splash) #skel .sb{display:flex;flex-direction:column;align-items:ce
 <div id="cmdWin" role="dialog" aria-label="Command Prompt" hidden><div class="cmd-bar"><span class="cmd-ic" aria-hidden="true">C:\_</span><span class="cmd-t">Command Prompt</span><span class="cmd-btns"><button type="button" data-a="min" aria-label="Minimize">&#8212;</button><button type="button" data-a="max" aria-label="Maximize">&#9633;</button><button type="button" data-a="x" class="x" aria-label="Close">&#10005;</button></span></div><div class="cmd-body" id="cmdBody"><div id="cmdOut"></div><label class="cmd-line"><span>C:\Users\guest&gt;</span><input id="cmdIn" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send" aria-label="Command input"></label></div></div>
 <script src="js/30-easter-eggs.js?v=20261107b" id="eggs-js"></script>
 <script src="js/31-preload-all.js?v=20261107b"></script>
-<script src="js/32-story.js?v=20261107b"></script>
+<script src="js/32-story.js?v=20261117"></script>
+<script src="js/33-id-card.js?v=20261110"></script>
 
 </body>
 </html>

@@ -3,7 +3,7 @@ box.querySelectorAll('.bs-card').forEach((c,i)=>c.dataset.n='0'+(i+1));const sta
 cards.forEach(c=>c.classList.remove('tilt'));let bh=0,W=0,PEEK=84,CW=0,CH=250,boxY=0,stickTop=0,total=1,target=0,cur=0,raf=0,lastDraw=-1;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),ease=t=>1-Math.pow(1-t,2.2);
 /* layout reads only here (load/resize); scrolling never touches layout */
-function measure(){W=stage.clientWidth;const m=innerWidth<=560;PEEK=m?30:150;CH=m?380:420;CW=Math.min(m?W-(N-1)*PEEK:400,W-(N-1)*PEEK);
+function measure(){W=stage.clientWidth;const m=innerWidth<=560;PEEK=m?20:150;CH=m?350:420;CW=Math.min(m?W-(N-1)*PEEK:400,W-(N-1)*PEEK);
  box.style.setProperty('--n',N);box.style.setProperty('--ch',CH+'px');
  cards.forEach(c=>{c.style.width=CW+'px'});
  let y=0,el=box;while(el){y+=el.offsetTop;el=el.offsetParent}boxY=y;bh=box.offsetHeight;

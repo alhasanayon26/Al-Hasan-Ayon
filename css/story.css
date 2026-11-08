@@ -54,3 +54,13 @@ html[data-calm] .st-node,html[data-calm] .st-ch.on .st-node::after,html[data-cal
  .st-c,.st-ch.past .st-c{opacity:1;transform:none;transition:none}
  .st-ch.on .st-node::after,.st-n.sw,.st-t.sw{animation:none}
 }
+
+/* ===== simple flip swap: whole word flips; for years only the changed digit flips ===== */
+.st-n,.st-t{white-space:pre;perspective:900px}
+.fc{display:inline-block;transform-origin:50% 50%;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.fc.fo{animation:fcOut .24s cubic-bezier(.5,0,.9,.5) both}
+.fc.fi{animation:fcIn .32s cubic-bezier(.1,.7,.3,1) both}
+@keyframes fcOut{from{transform:rotateX(0);opacity:1}to{transform:rotateX(-90deg);opacity:.2}}
+@keyframes fcIn{from{transform:rotateX(90deg);opacity:.2}to{transform:rotateX(0);opacity:1}}
+html[data-calm] .fc.fo,html[data-calm] .fc.fi{animation:none}
+@media(prefers-reduced-motion:reduce){.fc.fo,.fc.fi{animation:none}}
