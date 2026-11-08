@@ -4,7 +4,7 @@ const W=294,Ht=300;const MOB=matchMedia('(hover:none),(pointer:coarse)').matches
    (including its slide-in/scroll movement), so it moves exactly with the box and never jumps when chips are tapped. */
 let cb=null,rq=0;
 function place(){rq=0;
- if(innerWidth<=1100)return; /* small screens: the separate fit() script positions him */
+ return; /* positioning is handled only by fit() below */
  if(!cb||!cb.isConnected)cb=[...sec.querySelectorAll('.glass')].find(e=>/spoken/i.test(e.textContent.slice(0,40)));
  if(!cb)return;
  /* offsetTop/offsetLeft ignore transforms (slide-in, hover), so he never moves while scrolling */
